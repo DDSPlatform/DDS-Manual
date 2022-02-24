@@ -1,383 +1,758 @@
-#### BRIQUE Analytics 설치 가이드 (개인 PC용)
+#### BRIQUE Analytics 설치 매뉴얼 (Stand Alone - Linux)
 
-본 문서는 BRIQUE Analytics를 개인 PC 환경에서 독립 서버로 구동하기 위한 설치 방법을 포함하고 있습니다.
+본 문서는 BRIQUE Analytics를 Linux 환경의 독립 서버로 구동하기 위한 설치 방법을 포함하고 있음
+
+
+
+------
+
+##### 시스템 요구사양
+
+
+
+###### Operating System
+
+- CentOS 7.x 이상
+- RedHat 7 이상
+
+
+
+###### S/W
+
+- curl
+- wget
+- docker ([Install Docker Engine](https://docs.docker.com/engine/install/#server), `Server` section)
+
+
+
+###### H/W
+
+- CPU
+
+  2.5GHz 4core X 1cpu 이상
+
+- Memory
+
+  128GB 이상
+
+- HDD
+
+  100GB 이상
+
+
+
+------
+
+##### 온라인 설치
+
+
+
+###### 1. 설치파일 다운로드
+
+```sh
+# 설치 디렉토리 생성
+$ mkdir ~/bainstall
+
+# 설치파일 다운로드
+$ cd ~/bainstall
+$ curl -O https://ba.brique.kr/file/installer/v210r1/ba-2.1.0-r1.noarch.rpm
+```
+
+
+
+###### 2. 설치
+
+```sh
+# 설치 디렉토리로 이동
+$ cd ~/bainstall
+
+# Installer 설치
+$ sudo yum localinstall -y ba-2.1.0-r1.noarch.rpm
+......
+Complete!
+
+# 설치
+$ sudo ba install ~/bainstall
+
+......
+# 기본값으로 설치하기 위해 Enter 키를 입력하여 진행
+
+......
+BA is installed completely. You can access BA at http://127.0.0.1:8080 with default username/password: admin/brique_admin
+```
+
+
+
+###### 3. 동작 확인
+
+크롬 브라우져를 통해 BRIQUE Analytics에 접속
+
+- 접속 URL
+
+  http://localhost:8080
+
+- 접속계정
+
+  admin / brique_admin
+
+
+
+------
+
+##### 오프라인 설치
+
+
+
+###### 1. 설치파일 다운로드
+
+```sh
+# 설치 디렉토리 생성
+$ mkdir ~/bainstall
+$ mkdir ~/bainstall/datafile
+$ mkdir ~/bainstall/datafile/imgs
+
+# 설치파일 다운로드 디렉토리로 이동
+$ cd ~/bainstall/datafile
+
+# BA 설치파일 다운로드
+$ curl -O https://ba.brique.kr/file/installer/v210r1/ba-2.1.0-r1.noarch.rpm
+$ curl -O https://ba.brique.kr/file/installer/v210r1/ba-v210.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/library_basic.tar.gz
+
+# Python3.6 설치 및 패키지 파일 다운로드
+$ curl -O https://ba.brique.kr/file/installer/v210r1/python36.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/python36-package-full.tar.gz
+
+# R3.6.0 설치 및 패키지 파일 다운로드
+$ curl -O https://ba.brique.kr/file/installer/v210r1/r360.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/r360-package-full.tar.gz
+
+# Docker Image 다운로드 디렉토리로 이동
+$ cd ~/bainstall/datafile/imgs
+
+# Docker Image 파일 다운로드
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/api.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/platform-http.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/platform-database.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/platform-workflow.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/platform-result.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/kafka.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/kafdrop.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/redis-slave.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/zoo.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/python36.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/python36download.tar.gz
+$ curl -O https://ba.brique.kr/file/installer/v210r1/docker-image/r360-image.tar.gz
+```
+
+
+
+###### 2. 설치
+
+```sh
+# 설치 디렉토리로 이동
+$ cd ~/bainstall
+
+# Installer 설치
+$ sudo yum localinstall -y ba-2.1.0-r1.noarch.rpm
+......
+Complete!
+
+# 설치
+$ sudo ba install ~/bainstall
+
+......
+# 기본값으로 설치하기 위해 Enter 키를 입력하여 진행
+
+......
+BA is installed completely. You can access BA at http://127.0.0.1:8080 with default username/password: admin/brique_admin
+```
+
+
+
+###### 3. 동작 확인 (온라인 설치와 동일)
+
+크롬 브라우져를 통해 BRIQUE Analytics에 접속
+
+- 접속 URL
+
+  http://localhost:8080
+
+- 접속계정
+
+  admin / brique_admin
+
+
+
+------
+
+##### 설치 제거
+
+###### 1. 실행 중단
+
+```sh
+# 서비스 중단
+sudo ba stop 
+......
+
+==> BA is stopped completely. To run BA again, use this command: ba start
+```
+
+
+
+###### 2. 설치파일 제거
+
+```sh
+# 설치 제거
+sudo ba remove 
+......
+
+Removed BA completely. For more information, please visit https://ba.brique.kr/.
+```
+
+
+
+------
+
+#### BRIQUE Analytics 설치 매뉴얼 (StandAlone - Windows)
+
+본 문서는 BRIQUE Analytics를 Windows 환경의 독립 서버로 구동하기 위한 설치 방법을 포함하고 있음
+
+
 
 -----------------------
 
-#### 시스템 요구사항
+##### 시스템 요구사양
 
-##### 운영체제 (64비트)
+###### Operating System
 
-- Linux RHEL 계열
-  - CentOS 7 / 8
-  - Fedora 32 이상
-  - RedHat 7 이상
-- Linux Debian 계열
-  - Debian Buster 10 (Stable) 이상
-  - Ubuntu 18.04, 20.04
-- Windows
-  - Windows 10 64-bit Home, Pro, Enterprise, Education (Build 18362 이상)
-
-##### 메모리
-
-- 16 GB 이상
-
-##### CPU
-
-- x64 4 코어 이상
-
-##### Storage
-
-- 100 GB 이상
-
-##### 추가 패키지
-
-- 인터넷 연결이 지원되지 않는 환경인 경우 다음 소프트웨어들이 미리 설치되어 있어야 합니다.
-  - Linux: `curl`  `wget`  `docker`
-  - Windows: `Docker Desktop`  `WSL 2 (Ubuntu 20.04 Backend)`
-
-----------------------------------------------
-
-#### 설치
-
-##### Linux 환경에서 설치
-
-- 홈페이지의 다운로드 링크 혹은 다음 URL에서 설치환경에 맞는 패키지를 다운로드 합니다.
-
-  - DEB 패키지: https://ba.brique.kr/file/installer/v210r1/ba_2.1.0-r1-1_amd64.deb
-  - RPM 패키지: https://ba.brique.kr/file/installer/v210r1/ba-2.1.0-r1.noarch.rpm
-
-- 다운로드 받은 패키지가 있는 경로로 이동하여 패키지를 설치합니다.
-
-  - DEB 패키지
-
-    ```shell
-    $ dpkg -i ba_2.1.0-r1-1_amd64.deb
-    ```
-
-  - RPM 패키지
-
-    ```shell
-    $ yum localinstall -y ba-2.1.0-r1.noarch.rpm
-    ```
+- Windows 10 64-bit Home
+- Windows 10 Pro
+- Windows 10 Enterprise
+- Windows 10 Education (Build 18326 이상)
 
 
 
-- 설치할 대상 환경이 인터넷 연결을 지원하지 않는 경우, 다음 파일들을 추가로 다운로드하여 설치환경에 수동으로 업로드 해야 합니다.
-  - https://ba.brique.kr/file/installer/v210r1/ba-v210.tar.gz # 어플리케이션 데이터 파일
-  - https://ba.brique.kr/file/installer/v210r1/python36.tar.gz # Python 3.6 설치 파일
-  - https://ba.brique.kr/file/installer/v210r1/python36-package-full.tar.gz # Python 3.6 패키지 파일
-  - https://ba.brique.kr/file/installer/v210r1/r360.tar.gz # R 3.6.0 설치 파일
-  - https://ba.brique.kr/file/installer/v210r1/r360-package-full.tar.gz # R 3.6.0 패키지 파일
+###### S/W
 
-  위 파일들은 설치 환경에서 ba install 명령어를 실행할 때 매개변수로 지정할 디렉토리 밑의 혹은 ba install 명령어를 실행할 작업 디렉토리 (Working Directory) 밑의 `datafile/` 디렉토리에 위치해야 합니다.
-
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/api.tar.gz # 어플리케이션 도커 이미지 파일
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-http.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-database.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-workflow.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-result.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/kafka.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/kafdrop.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/redis-slave.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/zoo.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/python36.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/python36download.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/r360-image.tar.gz
-
-  위 파일들은 BA 어플리케이션을 실행할 Docker image로, Docker가 설치된 BA 설치 환경에서 다음과 같이 로드할 수 있습니다.
-
-  ```shell
-  $ docker image load --input=api.tar.gz ## api.tar.gz 아카이브 파일을 읽어들입니다.
-  ```
-
-  총 30 GB의 디스크 공간이 추가로 필요합니다.
+- Docker Desktop for Windows
+- WSL 2 (Windows Subsystem for Linux 2) 활성화 및 Ubuntu 20.04 WSL backend ([Install Docker Desktop on Windows](https://docs.docker.com/docker-for-windows/install/))
 
 
 
-- 패키지가 설치되었으면 다음 명령어로 BA 설치를 시작합니다.
+###### H/W
 
-  ```shell
-  $ ba install
-  ```
+- CPU
 
-  오프라인인 경우, 다음 명령어로 설치파일이 있는 디렉토리 ($INSTALL_DIR)를 매개변수로 지정해 줍니다.
-  
-  ```shell
-  $ ba install /home/brique/ba
-  ```
+  2.5GHz 4core X 1cpu 이상
 
----------------------------------------
+- Memory
 
-##### Windows 환경에서 설치
+  128GB 이상
 
-- 홈페이지의 다운로드 링크 혹은 다음 URL에서 패키지 `.zip` 파일을 다운로드 합니다.
+- HDD
 
-  - Windows 설치파일: https://ba.brique.kr/file/installer/v210r1/ba-v210r1-win64-installer.zip
-
-- 다운로드 받은 파일의 압축을 해제합니다.
-
-- 설치할 대상 환경이 인터넷 연결을 지원하지 않는 경우, 다음 파일들을 추가로 다운로드하여 설치환경에 수동으로 업로드 해야 합니다.
-
-  - https://ba.brique.kr/file/installer/v210r1/ba-v210.tar.gz # 어플리케이션 데이터 파일
-  - https://ba.brique.kr/file/installer/v210r1/python36.tar.gz # Python 3.6 설치 파일
-  - https://ba.brique.kr/file/installer/v210r1/python36-package-full.tar.gz # Python 3.6 패키지 파일
-  - https://ba.brique.kr/file/installer/v210r1/r360.tar.gz # R 3.6.0 설치 파일
-  - https://ba.brique.kr/file/installer/v210r1/r360-package-full.tar.gz # R 3.6.0 패키지 파일
-
-  위 파일들은 설치 환경에서 `.\ba.ps1 install` 명령어를 실행할 때 매개변수로 지정할 디렉토리 밑의 혹은 명령어를 실행할 작업 디렉토리 (Working Directory) 밑의 `datafile/` 디렉토리에 위치해야 합니다.
-
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/api.tar.gz # 어플리케이션 도커 이미지 파일
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-http.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-database.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-workflow.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-result.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/kafka.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/kafdrop.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/redis-slave.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/zoo.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/python36.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/python36download.tar.gz
-  - https://ba.brique.kr/file/installer/v210r1/docker-image/r360-image.tar.gz
-
-  위 파일들은 BA 어플리케이션을 실행할 Docker image로, Docker가 설치된 BA 설치 환경에서 다음과 같이 로드할 수 있습니다.
-
-  ```powershell
-  docker image load --input=api.tar.gz ## api.tar.gz 아카이브 파일을 읽어들입니다.
-  ```
-
-  총 30 GB의 디스크 공간이 추가로 필요합니다.
+  100GB 이상
 
 
 
-- 압축을 해제하였으면 관리자 권한으로 Windows Powershell을 실행합니다.
+------
 
-![img](./img/01-01-설치매뉴얼_01_StandAlone_01_PowerShell.png)
-
-- Powershell 창에서 다음 명령어를 실행합니다.
-
-```Powershell
-Set-ExecutionPolicy unrestricted
-```
+##### 필요 S/W 설치
 
 
 
-- 패키지 `.zip` 파일을 압축해제 한 경로로 이동해, `ba.ps1` 스크립트를 다음 명령어와 같이 실행합니다.
+###### 1. WSL 설치
+
+1. 관리자 권한으로 Widnows Power Shell 시작
+
+   시작 > Windows PowerShell > **<u>관리자 권한</u>**으로 실행
+
+   
+
+   ![Window Power Shell 시작](G:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows1.png)
+
+   
+
+   ```powershell
+   Windows PowerShell
+   Copyright (C) Microsoft Corporation. All rights reserved.
+   
+   새로운 크로스 플랫폼 PowerShell 사용 https://aka.ms/pscore6
+   
+   PS C:\WINDOWS\system32>
+   ```
+
+   
+
+2. WSL 설정
+
+   ```powershell
+   PS C:\WINDOWS\system32> dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+   
+   배포 이미지 서비스 및 관리 도구
+   버전: 10.0.19041.844
+   이미지 버전: 10.0.19042.1348
+   기능을 사용하도록 설정하는 중
+   [==========================100.0%==========================]
+   작업을 완료했습니다.
+   
+   PS C:\WINDOWS\system32> dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+   배포 이미지 서비스 및 관리 도구
+   버전: 10.0.19041.844
+   이미지 버전: 10.0.19042.1348
+   기능을 사용하도록 설정하는 중
+   [==========================100.0%==========================]
+   작업을 완료했습니다.
+   
+   PS C:\WINDOWS\system32>
+   ```
+
+   
+
+3. Windows 재 부팅
+
+   
+
+4. WSL2 Linux 커널 업데이트 패키지(wsl_update_x64.msi) 다운로드 및 설치
+
+   [x64 머신용 최신 WSL2 Linux 커널 업데이트 패키지](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+
+   
+
+5. WSL 기본 버전 설정
+
+   ```powershell
+   PS C:\WINDOWS\system32> wsl --set-default-version 2
+   WSL 2와의 주요 차이점에 대한 자세한 내용은 https://aka.ms/wsl2를 참조하세요
+   작업을 완료했습니다.
+   
+   PS C:\WINDOWS\system32>
+   ```
+
+   
+
+------
+
+###### 2. Docker Desktop for Windows 설치
+
+1. 설치파일 다운로드
+
+   [Docker Desktop for Mac and Windows | Docker](https://www.docker.com/products/docker-desktop)
+
+   
+
+2. 설치
+
+   설치 도중 아래 Configuration 모두 Check 후 설치 진행
+   ![설치 Configuration](G:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows3.png)
+
+   
+
+3. Docker Desktop 환경설정
+
+   - 바탕 화면에 생성된 Docker Desktop 실행
+
+   - Windows System Tray의 Docker Desktop Icon에서 환경설정 메뉴로 이동
+     ![Window Power Shell 시작](G:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows5.png)
+
+     
+
+   - General Tab에 Use the WSL2 based engine이 선택(체크)되어 있는지 확인
+
+   - 선택이 안되어 있다면 선택(체크) 후, Apply & Restart 버튼 클릭
+
+     ![General 설정](G:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows6.png)
+
+     
+
+   - Resource > WSL Integration 메뉴로 이동
+
+   - Enable Integration with my default WSL distro가 선택(체크)되어있는지 확인
+
+   - 선택이 안되어 있다면 선택(체크) 후, Apply & Restart 버튼 클릭
+
+     ![Resource 설정](G:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows7.png)
+
+
+
+------
+
+##### 온라인 설치
+
+
+
+###### 1. 설치파일 다운로드
+
+- https://ba.brique.kr/file/installer/v210r1/ba-v210r1-win64-installer.zip
+
+- 압축해제
+
+  C:\ba-v210r1-win64-installer
+
+
+
+###### 2. 설치
 
 ```powershell
-.\ba.ps1 install 
-```
+#===============================================================================
+# 1.실행정책 설정
+#===============================================================================
+PS C:\WINDOWS\system32> Set-ExecutionPolicy unrestricted
 
-​		또는 다음 명령어와 같이 설치 경로 ($INSTALL_DIR)를 매개변수로 지정할 수 있습니다.
+실행 규칙 변경
+실행 정책은 신뢰하지 않는 스크립트로부터 사용자를 보호합니다. 실행 정책을 변경하면 about_Execution_Policies 도움말
+항목(https://go.microsoft.com/fwlink/?LinkID=135170)에 설명된 보안 위험에 노출될 수 있습니다. 실행 정책을
+변경하시겠습니까?
+[Y] 예(Y)  [A] 모두 예(A)  [N] 아니요(N)  [L] 모두 아니요(L)  [S] 일시 중단(S)  [?] 도움말 (기본값은 "N"): A
 
-```powershell
-.\ba.ps1 install C:\Users\Me\ba
-```
+#===============================================================================
+# 2.설치폴더로 이동 후, 설치 실행
+#===============================================================================
+PS C:\WINDOWS\system32> cd c:\ba-v210r1-win64-installer
+PS C:\ba-v210r1-win64-installer> ./ba.ps1 install
 
------------------------------------
+......
+보안 경고
+신뢰하는 스크립트만 실행하십시오. 인터넷의 스크립트는 유용할 수 있지만 사용자 컴퓨터를 손상시킬 수도 있습니다.
+스크립트를 신뢰하는 경우 Unblock-File cmdlet을 사용하면 이 경고 메시지 없이 스크립트를 실행할 수 있습니다.
+C:\ba-v210r1-win64-installer\ba.ps1을(를) 실행하시겠습니까?
+[D] 실행 안 함(D)  [R] 한 번 실행(R)  [S] 일시 중단(S)  [?] 도움말 (기본값은 "D"): R
+......
 
-##### 설치 진행
+#-------------------------------------------------------------------------------
+# 다음 오류 발생 시, Docker Desktop이 초기화 될때까지 기다려야 함
+#-------------------------------------------------------------------------------
+docker : 'docker' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우 경로가 올바른지 검증한 다음 다시 시도하십시오.
+#-------------------------------------------------------------------------------
+# 반복적인 오류 발생 시, Docker Desktop을 실행 후, install 재 실행
+#-------------------------------------------------------------------------------
 
-설치가 시작되면 다음과 같이 프롬프트 메세지가 출력됩니다. 설치환경에 맞게 매개변수 등을 설정해줍니다.
+......
 
-```shell
-## 설치파일 디렉토리를 매개변수로 받은 경우 출력합니다.
-## 설치에 필요한 .tar.gz 압축파일들이 위치한 경로이며 BA를 설치하는 경로 $BA_HOME은 별도 지정합니다.
-Install Directory: /home/brique/Downloads
+# 기본값으로 설치하기 위해 Enter 키를 입력하여 진행
 
-## Root 권한으로 installer를 실행하는 경우 알림 메세지를 출력합니다.
-> You are running installer under root.
+......
 
-## BA가 이미 설치되어 동작중인 환경이면 다음과 같이 중지 후 재설치 여부를 묻는 메세지가 출력됩니다.
-You are running an instance of BA. You have to stop and remove this instance first. Do you want to continue? (press y to accept) # y를 입력하면 동작중인 BA를 중지하고 재설치를 진행합니다.
-
-## 마찬가지로 BA가 사용하는 환경 매개변수가 이미 존재하는 경우 다음과 같이 재사용 여부를 묻는 메세지가 출력됩니다.
-> Environment variables for BA were found. Looks like you already have installed BA, below are the parameters which were used in previous installation.
-
-> Do you want to re-use above parameters? (press y to use them again) 
-# y를 입력하면 환경 매개변수를 재사용합니다.
-
-## 설치환경이 BA에서 지원하는 운영체제인지 확인합니다.
-[Step 1] Checking supported OS: 
-Supported OS # 설치가 가능한 운영체제입니다.
-
-## 인터넷 연결이 지원되는 환경인지 확인합니다.
-[Step 2] Check internet connection: 
-You are online. # 인터넷 연결이 지원되는 환경입니다.
-You are offline. Checking data files in datafile directory. # 지원되지 않는 환경입니다.
-## 인터넷 연결이 지원되지 않는 환경인 경우, $INSTALL_DIR 내부의 datafile 디렉토리를 검사하여 필요한 설치파일들이 있어야 설치를 진행할 수 있습니다.
-
-## 필요한 소프트웨어 패키지들이 설치되어 있는지 확인합니다.
-[Step 3] Installing necessary packages: 
-> To run BA, we need to install these packages: curl, wget, docker.
->> Checking curl status: Installed. # curl 패키지가 설치되어 있습니다.
->> Checking wget status: Installed. # wget 패키지가 설치되어 있습니다.
->> Checking docker status: Installed. # docker 패키지가 설치되어 있습니다.
-
->>> Verifying docker service can be started. # Docker 데몬이 동작중인지 검사합니다.
->>> Docker service is started completely. # Docker 데몬이 실행중이며 설치를 진행할 수 있습니다.
-
-## 호스트를 Docker Swarm Node로 초기화합니다.
-[Step 4] Starting swarm mode in docker 
-
-## BA를 설치합니다.
+#===============================================================================
+# 3.설치폴더 변경 (필요시)
+#===============================================================================
+......
 [Step 5] Installing BA
-# 사용자와 호스트 정보를 읽어들입니다.
-> 5.1. Getting current user, host information 
->> Current user: brique
->> Current user group: brique
->> Current host IP address: 192.168.0.1
->> Current hostname: myHost
-# BA를 설치할 경로를 확인합니다.
-> 5.2. Enter directory path where you want to install Brique Analytics. (default: /opt/ba) 
-# BA 설치경로 ($BA_HOME)는 기본적으로 /opt/ba로 세팅되어 있습니다. 
-# Enter를 누르면 기본값인 /opt/ba에 BA를 설치합니다.
-# 다른 경로에 설치하기를 원하는 경우 직접 경로를 입력합니다.
+>> Current host IP address: 192.168.0.103
+>> Current hostname: DESKTOP-6680PQ4
+> 5.2. Enter directory path where you want to install Brique Analytics. (default: C:\Users\brique\ba)
+>> Directory: C:\BA
+......
 
-# 지정된 BA 설치 경로를 출력합니다.
->> BA Directory: /opt/ba
+#===============================================================================
+# 4.설치완료
+#===============================================================================
+......
 
-# $BA_HOME 디렉토리가 이미 존재하는 경우 해당 디렉토리를 재사용할 지 여부를 확인합니다.
->>> /opt/ba directory already exists. Do you want to reuse contents inside this directory? (y/n)
-# y를 입력하면 해당 디렉토리의 내용을 그대로 사용합니다.
-# n을 입력하면 해당 디렉토리를 삭제하고 데이터파일을 다운로드하거나 $INSTALL_DIR/datafile 에서 데이터를 가져옵니다.
+==> BA is installed completely. You can access BA ui at http://127.0.0.1:8080 with default username/password: admin/brique_admin
+```
 
-# $BA_HOME 디렉토리가 없는 경우 생성합니다.
->>> Creating BA Directory. May need to input user password.
 
-# BA 환경변수를 설정합니다.
-# 값을 입력하지 않고 Enter를 누르면 기본값을 사용합니다.
-> 5.3. BA configuration
->> Postgresql port (default: 5432): # BA의 사용자 데이터를 관리할 Postgres DB의 포트번호입니다.
->> Postgresql username (default: ba210 - We strongly recommend you to use only lowercase alphabets and numbers): # Postgres DB에서 사용할 사용자 이름입니다. 영문 소문자 알파벳과 숫자만을 사용하기를 권장합니다.
->> Postgresql password (default: ba210): # Postgres DB에서 사용할 사용자 비밀번호입니다.
->> Redis password (default: ba210): # BA 실행 데이터를 관리할 Redis DB의 비밀번호입니다.
->> Redis port (default: 6379): # Redis DB의 포트번호입니다.
->> Kafdrop (Kafka Manager UI) port (default: 9000): # Kafdrop의 포트번호입니다.
->> Port prefix for BA (For example, platform port: 8081, main: 8080, auth: 8082 => port prefix is 808) (default: 808): # BA 서비스의 포트번호 접두사를 설정합니다.
->> Port for BA main (BA Main Server with Web UI, must be consistent with defined port prefix) (default: 8080): # BA 메인 UI의 포트번호입니다.
->> Port for BA platform (BA Core Engine, must be consistent with defined port prefix) (default: 8081): # BA Platform의 포트번호입니다.
->> Port for BA auth (Authentication Server for BA, must be consistent with defined port prefix) (default: 8082): # BA 인증서비스의 포트번호입니다.
->> Port for BA admin (Administrator Page for BA, must be consistent with defined port prefix) (default: 8083): # BA 관리자 페이지의 포트번호입니다.
->> Port for BA batch (Background Job Manager for BA, must be consistent with defined port prefix) (default: 8084): # BA 배치 페이지의 포트번호입니다.
 
-# 설정한 BA 환경변수들을 출력합니다.
->> BA configuration summary: 
-	Postgresql port: 5432
-	Postgresql user: ba210
-	Portgresql pass: ba210
-	Redis port: 6379
-	Kafdrop port: 9000
-	BA prefix port: 808
-	BA main port: 8080
-	BA platform port: 8081
-	BA auth port: 8082
-	BA admin port: 8083
-	BA batch port: 8084
+###### 3. 설치 확인
 
-# BA 설치경로로 이동합니다.
->> Entering to /opt/ba
+```powershell
+# 데이터베이스 설치 확인
+PS C:\ba-v210r1-win64-installer> docker ps -a | findstr post
+7e98feba59fe   brique/ba-eco-postgres13:v2.1.0-r1          "docker-entrypoint.s??   37 minutes ago   Up 37 minutes               0.0.0.0:5432->5432/tcp                   postgres13
 
-# 설치경로를 확인합니다.
-> 5.4. Checking BA data file
-# 설치경로에 어플리케이션 데이터가 이미 있는 경우 재사용할 지 여부를 확인합니다.
->> BA data directory already exists. Do you want to reuse this data? (y/n) 
-# 설치경로에 어플리케이션 데이터 아카이브 파일이 이미 있는 경우 재사용할 지 여부를 확인합니다.
->> ba-v210.tar.gz data file already exists. Do you want to reuse this data? (y/n)
-# 설치경로에 어플리케이션 데이터 아카이브 파일 (ba-v210.tar.gz)이 없는 경우 다운로드합니다.
->> Downloading BA data file from https://ba.brique.kr/file/installer/v210r1/ba-v210.tar.gz to /opt/ba/tmp 
+# 서비스 설치 확인
+PS C:\ba-v210r1-win64-installer> docker service ls
+ID             NAME                        MODE         REPLICAS   IMAGE                                       PORTS
+......
+1dgnurndg9el   ba-prod_admin               replicated   1/1        brique/ba-api:v2.1.0-r1
+l8c1foyp488j   ba-prod_auth                replicated   1/1        brique/ba-api:v2.1.0-r1
+l5y191c8opng   ba-prod_batch               replicated   1/1        brique/ba-api:v2.1.0-r1
+o7zbvfldie3g   ba-prod_main                replicated   1/1        brique/ba-api:v2.1.0-r1
+......
 
-# 어플리케이션 데이터를 재사용 하지 않는 경우 다운로드 한 혹은 이미 존재하는 .tar.gz 파일을 사용합니다.
-# 설치경로 $BA_HOME 밑에 data/ 디렉토리와 badata/ 디렉토리가 생성됩니다.
->> Extracting $BA_DATA_FILE file: [>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 
+PS C:\ba-v210r1-win64-installer>
+```
 
-# 현재 노드의 Docker Node role을 업데이트합니다.
-> 5.5. Updating role for current node inside docker swarm 
 
-# Postgres DBMS 도커 컨테이너를 구동합니다.
-> 5.6. Creating Postgresql docker container
-# $BA_HOME 경로 밑 data/postgresql/ 디렉토리가 이미 존재하는 경우 데이터를 재사용할 지 확인합니다.
->> Postgresql data is existed. Do you want to use these data again? (press y to accept)
-# n을 입력하면 초기화된 상태의 BA 데이터베이스를 새로 생성합니다.
 
->> Starting Postgres docker container
->>> Initializing Postgres docker container...
->>> Postgres docker container is ready to use.
+###### 4. 동작확인
 
-# 데이터가 없는 경우 데이터베이스를 초기화하고 스키마를 새로 생성합니다.
->> Creating Postgres database schema
+크롬 브라우져를 통해 BRIQUE Analytics에 접속
 
-# Redis 서비스를 구동합니다.
-> 5.7. Creating Redis docker container 
-# $BA_HOME 경로 밑 data/eco/redis/appendonly.aof 파일이 이미 존재하는 경우 데이터를 재사용할 지 확인합니다.
->> Redis data already exists. Do you want to reuse this data? (y/n)
->> Deploying redis stack
->>> Redis stack is still creating...
->>> Redis stack is created completely.
+- 접속 URL
 
-# Kafka 스택 (Kafka, Zookeeper, Kafdrop)을 구동합니다.
-> 5.8. Creating Kafka docker container
->> Deploying kafka stack
->>> Kafka stack is still creating...
->>> Kafka stack is created completely.
+  http://localhost:8080
 
-# BA 스택 (Main, Platform, Auth, Admin, Batch 및 인터프리터)을 구동합니다.
-> 5.9. Creating BA (Platform, API, UI) docker container
-# $BA_HOME 경로 밑 data/interpreter/exec/python36 디렉토리가 이미 존재하는 경우 해당 데이터를 재사용할 지 확인합니다.
->> Python 3.6 data already exists. Do you want to reuse this data? (y/n) 
-# 없거나 재사용하지 않는 경우 다운로드 합니다.
-# 인터넷 연결이 없는 환경인 경우 셋업된 datafile/ 디렉토리 내의 아카이브를 이용합니다.
->> Downloading Python 3.6 data from https://ba.brique.kr/file/installer/v210r1/python36.tar.gz to /opt/ba/tmp 
-# $BA_HOME 밑의 data/interpreter/exec/ 경로에 압축을 해제합니다.
->> Extracting $PYTHON_36_DATA_FILE file:   [>>>>>>>>>>>>>>>>>>>>>>>>>>>]
+- 접속계정
 
-# $BA_HOME 경로 밑 data/interpreter/exec/r360 디렉토리가 이미 존재하는 경우 해당 데이터를 재사용할 지 확인합니다.
->> R 3.6.0 data already exists. Do you want to reuse this data? (y/n)
-# 없거나 재사용하지 않는 경우 다운로드 합니다.
-# 인터넷 연결이 없는 환경인 경우 셋업된 datafile/ 디렉토리 내의 아카이브를 이용합니다.
->> Downloading R 3.6.0 data from https://ba.brique.kr/file/installer/v210r1/r360.tar.gz to /opt/ba/tmp 
-# $BA_HOME 밑의 data/interpreter/exec/ 경로에 압축을 해제합니다.
->> Extracting $R360_DATA_FILE file:   [>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 
+  admin / brique_admin
 
-# Docker compose 파일을 이용해서 BA 서비스들을 배포합니다.
->> Deploying BA stack
->>> [1/11] ba-prod_main... -> Done
->>> [2/11] ba-prod_auth... -> Done
->>> [3/11] ba-prod_admin... -> Done
->>> [4/11] ba-prod_batch... -> Done
->>> [5/11] ba-prod_platform-http... -> Done
->>> [6/11] ba-prod_platform-database... -> Done
->>> [7/11] ba-prod_platform-result... -> Done
->>> [8/11] ba-prod_platform-workflow... -> Done
->>> [9/11] ba-prod_python36cpu... -> Done
->>> [10/11] ba-prod_r360... -> Done
->>> [11/11] ba-prod_python36download... -> Done
 
-# BA 서비스 상태를 체크합니다.
-> 5.10. Checking BA services status
-# API 서비스의 상태를 체크합니다.
->> BA api is booting up...
->> BA api is started completely.
 
-# Python에서 사용할 기본 패키지들을 설치할 지 여부를 확인합니다.
->> Do you want to install the basic python packages? (y/n)
-# 인터넷 연결이 있는 환경인 경우 다운로드 합니다.
->> Downloading Python 3.6 package data from $BA_DATA_URL$PYTHON_36_PACKAGE_FILE to $BA_HOME/tmp
-# 패키지들을 data/interpreter/exec/ 경로에 압축 해제합니다.
->> Extracting $PYTHON_36_PACKAGE_FILE file:   [>>>>>>>>>>>>>>>>>>>>>]
+------
 
-# R에서 사용할 기본 패키지들을 설치할 지 여부를 확인합니다.
->> Do you want to install the basic R packages? (y/n)
-# 인터넷 연결이 있는 환경인 경우 다운로드 합니다.
->> Downloading R 3.6.0 package data from $BA_DATA_URL$R360_PACKAGE_FILE to $BA_HOME/tmp
-# 패키지들을 data/interpreter/exec/ 경로에 압축 해제합니다.
->> Extracting $R360_PACKAGE_FILE file:   [>>>>>>>>>>>>>>>>>>>>>]
+##### 오프라인 설치
 
-# Platform 서비스의 상태를 체크합니다.
->> BA platform is booting up...
->> BA platform is started completely.
-# 설치가 완료되었습니다. 설정한 환경변수에 따라 Main 서비스로 접근할 수 있는 URL을 출력합니다.
-# 기본 사용자 정보는 ID: admin, PW: brique_admin 입니다.
-==> BA is installed completely. You can access BA at http://192.168.0.1:8080 with default username/password: admin/brique_admin
+
+
+###### 1. 설치파일 다운로드
+
+- BA 설치파일 다운로드 및 압축해제
+
+  - 압축해제 위치 (C:\ba-v210r1-win64-installer)
+  - https://ba.brique.kr/file/installer/v210r1/ba-v210r1-win64-installer.zip
+
+- BA 파일 다운로드
+
+  - 다운로드 위치 (C:\ba-v210r1-win64-installer\datafile)
+  - https://ba.brique.kr/file/installer/v210r1/ba-v210.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/library_basic.tar.gz
+
+- Python3.6 설치 및 패키지 파일 다운로드
+
+  - 다운로드 위치 (C:\ba-v210r1-win64-installer\datafile)
+  - https://ba.brique.kr/file/installer/v210r1/python36.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/python36-package-full.tar.gz
+
+- R3.6.0 설치 및 패키지 파일 다운로드
+
+  - 다운로드 위치 (C:\ba-v210r1-win64-installer\datafile)
+  - https://ba.brique.kr/file/installer/v210r1/r360.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/r360-package-full.tar.gz
+
+  
+
+- Docker Image 파일 다운로드
+
+  - 다운로드 위치 (C:\ba-v210r1-win64-installer\datafile\imgs)
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/api.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-http.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-database.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-workflow.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/platform-result.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/kafka.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/kafdrop.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/redis-slave.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/zoo.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/python36-cpu.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/python36download.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/r360-image.tar.gz
+  - https://ba.brique.kr/file/installer/v210r1/docker-image/postgres13.tar.gz
+
+
+
+###### 2. 설치
+
+```powershell
+#===============================================================================
+# 1.실행정책 설정
+#===============================================================================
+PS C:\WINDOWS\system32> Set-ExecutionPolicy unrestricted
+
+실행 규칙 변경
+실행 정책은 신뢰하지 않는 스크립트로부터 사용자를 보호합니다. 실행 정책을 변경하면 about_Execution_Policies 도움말
+항목(https://go.microsoft.com/fwlink/?LinkID=135170)에 설명된 보안 위험에 노출될 수 있습니다. 실행 정책을
+변경하시겠습니까?
+[Y] 예(Y)  [A] 모두 예(A)  [N] 아니요(N)  [L] 모두 아니요(L)  [S] 일시 중단(S)  [?] 도움말 (기본값은 "N"): A
+
+#===============================================================================
+# 2.설치폴더로 이동 후, 설치 실행
+#===============================================================================
+PS C:\WINDOWS\system32> cd c:\ba-v210r1-win64-installer
+PS C:\ba-v210r1-win64-installer> ./ba.ps1 install C:\ba-v210r1-win64-installer
+
+......
+보안 경고
+신뢰하는 스크립트만 실행하십시오. 인터넷의 스크립트는 유용할 수 있지만 사용자 컴퓨터를 손상시킬 수도 있습니다.
+스크립트를 신뢰하는 경우 Unblock-File cmdlet을 사용하면 이 경고 메시지 없이 스크립트를 실행할 수 있습니다.
+C:\ba-v210r1-win64-installer\ba.ps1을(를) 실행하시겠습니까?
+[D] 실행 안 함(D)  [R] 한 번 실행(R)  [S] 일시 중단(S)  [?] 도움말 (기본값은 "D"): R
+......
+
+#-------------------------------------------------------------------------------
+# 다음 오류 발생 시, Docker Desktop이 초기화 될때까지 기다려야 함
+#-------------------------------------------------------------------------------
+docker : 'docker' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우 경로가 올바른지 검증한 다음 다시 시도하십시오.
+#-------------------------------------------------------------------------------
+# 반복적인 오류 발생 시, Docker Desktop을 실행 후, install 재 실행
+#-------------------------------------------------------------------------------
+
+......
+
+# 기본값으로 설치하기 위해 Enter 키를 입력하여 진행
+
+......
+
+#===============================================================================
+# 3.설치폴더 변경 (필요시)
+#===============================================================================
+......
+[Step 5] Installing BA
+>> Current host IP address: 192.168.0.103
+>> Current hostname: DESKTOP-6680PQ4
+> 5.2. Enter directory path where you want to install Brique Analytics. (default: C:\Users\brique\ba)
+>> Directory: C:\BA
+......
+
+#===============================================================================
+# 4.설치완료
+#===============================================================================
+......
+
+==> BA is installed completely. You can access BA ui at http://127.0.0.1:8080 with default username/password: admin/brique_admin
+```
+
+
+
+###### 3. 설치 확인 (온라인 설치와 동일)
+
+```powershell
+# 데이터베이스 설치 확인
+PS C:\ba-v210r1-win64-installer> docker ps -a | findstr post
+7e98feba59fe   brique/ba-eco-postgres13:v2.1.0-r1          "docker-entrypoint.s??   37 minutes ago   Up 37 minutes               0.0.0.0:5432->5432/tcp                   postgres13
+
+# 서비스 설치 확인
+PS C:\ba-v210r1-win64-installer> docker service ls
+ID             NAME                        MODE         REPLICAS   IMAGE                                       PORTS
+......
+1dgnurndg9el   ba-prod_admin               replicated   1/1        brique/ba-api:v2.1.0-r1
+l8c1foyp488j   ba-prod_auth                replicated   1/1        brique/ba-api:v2.1.0-r1
+l5y191c8opng   ba-prod_batch               replicated   1/1        brique/ba-api:v2.1.0-r1
+o7zbvfldie3g   ba-prod_main                replicated   1/1        brique/ba-api:v2.1.0-r1
+......
+
+PS C:\ba-v210r1-win64-installer>
+```
+
+
+
+###### 4. 동작 확인 (온라인 설치와 동일)
+
+크롬 브라우져를 통해 BRIQUE Analytics에 접속
+
+- 접속 URL
+
+  http://localhost:8080
+
+- 접속계정
+
+  admin / brique_admin
+
+
+
+------
+
+##### 설치 제거 
+
+
+
+###### 1. 실행 중단
+
+```powershell
+# 서비스 중단
+PS C:\WINDOWS\system32> cd c:\ba-v210r1-win64-installer
+PS C:\ba-v210r1-win64-installer>  ./ba.ps1 stop
+......
+
+==> BA is stopped completely. To run BA again, using this command: ba start
+```
+
+
+
+###### 2. 설치파일 제거
+
+```powershell
+# 설치 제거
+PS C:\WINDOWS\system32> cd c:\ba-v210r1-win64-installer
+PS C:\ba-v210r1-win64-installer> ./ba.ps1 remove
+......
+
+Removed BA completely. For more information, please visit https://ba.brique.kr/.
+```
+
+
+
+------
+
+##### 문제 해결
+
+
+
+###### 1. 윈도우 재 시작 시 서비스 구동
+
+  - Docker Desktop 실행 후, 서비스 실행여부 확인
+    ![Docker Desktop 시작](G:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows14.png)
+
+    
+
+  - 데이터베이스 및 서비스 실행여부 확인
+
+    ```powershell
+    PS C:\WINDOWS\system32> docker ps -a | findstr post
+    c9338738d6c9   brique/ba-eco-postgres13:v2.1.0-r1          "docker-entrypoint.s??   2 hours ago         Exited (255) About a minute ago   0.0.0.0:5432->5432/tcp                   postgres13
+    
+    #-------------------------------------------------------------------------------
+    # Exit 상태인 경우, 데이터베이스 재 실행
+    #-------------------------------------------------------------------------------
+    PS C:\WINDOWS\system32> docker start postgres13
+    
+    # 데이터베이스 실행 재 확인
+    PS C:\WINDOWS\system32> docker ps -a | findstr post
+    c9338738d6c9   brique/ba-eco-postgres13:v2.1.0-r1          "docker-entrypoint.s??   2 hours ago          Up 3 seconds                      0.0.0.0:5432->5432/tcp                   postgres13
+    
+    # 서비스 실행 확인 (서비스는 자동으로 실행되기 때문에 모든 서비스가 1/1이 될 때까지 대기)
+    PS C:\WINDOWS\system32> docker service ls
+    ID             NAME                        MODE         REPLICAS   IMAGE                                       PORTS
+    ......
+    1dgnurndg9el   ba-prod_admin               replicated   1/1        brique/ba-api:v2.1.0-r1
+    l8c1foyp488j   ba-prod_auth                replicated   1/1        brique/ba-api:v2.1.0-r1
+    l5y191c8opng   ba-prod_batch               replicated   1/1        brique/ba-api:v2.1.0-r1
+    o7zbvfldie3g   ba-prod_main                replicated   1/1        brique/ba-api:v2.1.0-r1
+    ......
+    
+    PS C:\WINDOWS\system32>
+    ```
+
+  
+
+------
+
+###### 2. 서비스 재 시작
+
+```powershell
+# 워크플로우 실행이 안되는 경우
+PS C:\WINDOWS\system32> docker service scale ba-prod_platform-workflow=0
+PS C:\WINDOWS\system32> docker service scale ba-prod_platform-workflow=1
+
+# 워크플로우 실행결과가 표현이 안되는 경우
+PS C:\WINDOWS\system32> docker service scale ba-prod_platform-result=0
+PS C:\WINDOWS\system32> docker service scale ba-prod_platform-result=1
+```
+
+
+
+------
+
+###### 3. 로그인 오류
+
+- 데이터베이스 및 서비스 실행여부 확인
+
+```powershell
+# 데이터베이스 서비스 실행여부 확인
+PS C:\WINDOWS\system32> docker ps -a | findstr post
+c9338738d6c9   brique/ba-eco-postgres13:v2.1.0-r1          "docker-entrypoint.s??   2 hours ago         Exited (255) About a minute ago   0.0.0.0:5432->5432/tcp                   postgres13
+
+#-------------------------------------------------------------------------------
+# Exit 상태인 경우, 데이터베이스 재 실행
+#-------------------------------------------------------------------------------
+PS C:\WINDOWS\system32> docker start postgres13
+
+# 데이터베이스 실행 재 확인
+PS C:\WINDOWS\system32> docker ps -a | findstr post
+c9338738d6c9   brique/ba-eco-postgres13:v2.1.0-r1          "docker-entrypoint.s??   2 hours ago          Up 3 seconds                      0.0.0.0:5432->5432/tcp                   postgres13
+
+PS C:\WINDOWS\system32>
 ```
 
