@@ -6,7 +6,6 @@
 
 
 
-
 -----------------------
 
 ##### 시스템 요구사양
@@ -35,7 +34,7 @@
 
 - Memory
 
-  16GB 이상
+  128GB 이상
 
 - HDD
 
@@ -57,7 +56,7 @@
 
    
 
-   ![Window Power Shell 시작](H:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows1.png)
+   ![Window Power Shell 시작](img\install-windows1.png)
 
    
 
@@ -132,7 +131,7 @@
 2. 설치
 
    설치 도중 아래 Configuration 모두 Check 후 설치 진행
-   ![설치 Configuration](H:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows3.png)
+   ![설치 Configuration](img\install-windows3.png)
 
    
 
@@ -141,7 +140,7 @@
    - 바탕 화면에 생성된 Docker Desktop 실행
 
    - Windows System Tray의 Docker Desktop Icon에서 환경설정 메뉴로 이동
-     ![Window Power Shell 시작](H:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows5.png)
+     ![Window Power Shell 시작](img\install-windows5.png)
 
      
 
@@ -149,7 +148,7 @@
 
    - 선택이 안되어 있다면 선택(체크) 후, Apply & Restart 버튼 클릭
 
-     ![General 설정](H:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows6.png)
+     ![General 설정](img\install-windows6.png)
 
      
 
@@ -159,7 +158,7 @@
 
    - 선택이 안되어 있다면 선택(체크) 후, Apply & Restart 버튼 클릭
 
-     ![Resource 설정](H:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows7.png)
+     ![Resource 설정](img\install-windows7.png)
 
 
 
@@ -470,7 +469,7 @@ Removed BA completely. For more information, please visit https://ba.brique.kr/.
 ###### 1. 윈도우 재 시작 시 서비스 구동
 
   - Docker Desktop 실행 후, 서비스 실행여부 확인
-    ![Docker Desktop 시작](H:/공유 드라이브/BRIQUE/(B)과제/(BB)내부/BA/v2.1.0-r1/03.매뉴얼/04.운영자/img/install-windows14.png)
+    ![Docker Desktop 시작](img\install-windows14.png)
 
     
 
